@@ -954,7 +954,10 @@ public final class GmFileReader
 			rm.put(PRoom.SPEED,in.read4());
 			rm.put(PRoom.PERSISTENT,in.readBool());
 			rm.put(PRoom.BACKGROUND_COLOR,Util.convertGmColor(in.read4()));
-			rm.put(PRoom.DRAW_BACKGROUND_COLOR,in.readBool());
+			int drawBackgrounds = in.read4();
+			rm.put(PRoom.DRAW_BACKGROUND_COLOR,((drawBackgrounds & 0x01) != 0));
+			rm.put(PRoom.CLEAR_VIEW_BACKGROUND,((drawBackgrounds & 0x02) == 0));
+
 			rm.put(PRoom.CREATION_CODE,in.readStr());
 			int nobackgrounds = in.read4();
 			for (int j = 0; j < nobackgrounds; j++)
